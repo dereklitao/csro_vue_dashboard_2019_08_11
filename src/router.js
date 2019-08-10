@@ -1,25 +1,41 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: "/",
+      name: "dashboard",
+      component: () => import("@/views/1-DashBoard.vue")
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: "/rooms",
+      name: "rooms",
+      component: () => import("@/views/2-Rooms.vue")
+    },
+    {
+      path: "/scenes",
+      name: "scene",
+      component: () => import("@/views/3-Scenes.vue")
+    },
+    {
+      path: "/airsystem",
+      name: "airsystem",
+      component: () => import("@/views/4-AirSystem.vue")
+    },
+    {
+      path: "/curtains",
+      name: "curtains",
+      component: () => import("@/views/5-Curtains.vue")
+    },
+    {
+      path: "/lights",
+      name: "lights",
+      component: () => import("@/views/6-Lights.vue")
     }
   ]
-})
+});
