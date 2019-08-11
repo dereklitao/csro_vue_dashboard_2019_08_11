@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="$store.state.drawer" app clipped>
+  <v-navigation-drawer v-model="showLeftDrawer" app clipped>
     <v-layout column align-center>
       <v-flex shrink ma-3>
         <img width="180px" src="@/assets/image/logo-en.png" />
@@ -18,9 +18,15 @@
 
 <script>
 import LeftDrawerItem from "@/components/drawer/LeftDrawerItem";
+import { mapState } from "vuex";
 export default {
   components: {
     LeftDrawerItem
+  },
+  computed: {
+    ...mapState({
+      showLeftDrawer: state => state.general.showLeftDrawer
+    })
   }
 };
 </script>

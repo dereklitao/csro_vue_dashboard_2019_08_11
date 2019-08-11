@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app clipped-left dense color="teal" dark>
-    <v-app-bar-nav-icon @click.stop="$store.commit('toggledrawer')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click.stop="toggleLeftDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title class="align-center">
       <span class="title font-weight-light">壹品慧居</span>
     </v-toolbar-title>
@@ -12,7 +12,15 @@
 </template>
 
 <script>
-export default {};
+import { mapMutations } from "vuex";
+export default {
+  methods: {
+    ...mapMutations(["toggleShowLeftDrawer"]),
+    toggleLeftDrawer() {
+      this.toggleShowLeftDrawer();
+    }
+  }
+};
 </script>
 
 <style>

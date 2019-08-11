@@ -1,16 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import general from "@/store/general";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    drawer: true
-  },
-  mutations: {
-    toggledrawer: function() {
-      this.state.drawer = !this.state.drawer;
-    }
-  },
-  actions: {}
+  modules: {
+    general
+  }
 });
