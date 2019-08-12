@@ -17,6 +17,7 @@ import Footer from "@/layouts/Footer";
 import LeftDrawer from "@/layouts/LeftDrawer";
 
 export default {
+  name: "my-app",
   components: {
     AppBar,
     LeftDrawer,

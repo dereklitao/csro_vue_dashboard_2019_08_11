@@ -20,6 +20,7 @@ import PieChart from "@/components/charts/PieChart";
 import LineChart from "@/components/charts/LineChart";
 import { mapMutations } from "vuex";
 export default {
+  name: "dashboard",
   components: {
     PieChart,
     LineChart
@@ -27,6 +28,7 @@ export default {
   data() {
     return {};
   },
+
   methods: {
     ...mapMutations(["toggleShowLeftDrawer", "changePieData"]),
     changeData() {

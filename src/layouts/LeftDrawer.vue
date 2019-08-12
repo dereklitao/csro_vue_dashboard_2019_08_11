@@ -18,15 +18,13 @@
 
 <script>
 import LeftDrawerItem from "@/components/drawer/LeftDrawerItem";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   components: {
     LeftDrawerItem
   },
   computed: {
-    ...mapState({
-      showLeftDrawer: state => state.general.showLeftDrawer
-    })
+    ...mapGetters(["showLeftDrawer"])
   }
 };
 </script>

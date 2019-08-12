@@ -14,7 +14,6 @@ export default {
             ctx.textBaseline = "bottom";
             ctx.font = "bold 13px Helvetica Neue";
             var meta = this.chart.controller.getDatasetMeta(0);
-            console.log(this);
             meta.data.forEach((pie, index) => {
               ctx.fillStyle = pie._model.backgroundColor;
               ctx.fillText(
