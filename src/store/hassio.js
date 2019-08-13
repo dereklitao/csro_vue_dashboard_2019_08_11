@@ -14,3 +14,11 @@ export var subscribe = {
   type: "subscribe_events",
   event_type: "state_changed"
 };
+
+export var gethistory = {
+  id: 22,
+  type: "get_history",
+  service_data: {
+    entity_id: "light.nlight4_0_beddc245ceb8"
+  }
+};

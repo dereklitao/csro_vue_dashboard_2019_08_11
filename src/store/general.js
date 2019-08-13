@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { authinfo, fetchStates, subscribe } from "./hassio";
+import { authinfo, fetchStates, subscribe, gethistory } from "./hassio";
 
 var messageId = 10;
 
@@ -59,12 +59,13 @@ const mutations = {
 };
 
 function receiveMessage(message) {
-  // console.log(message);
+  console.log(message);
   if (message.type == "auth_required") {
     Vue.prototype.$socket.sendObj(authinfo);
   } else if (message.type == "auth_ok") {
     Vue.prototype.$socket.sendObj(fetchStates);
     Vue.prototype.$socket.sendObj(subscribe);
+    Vue.prototype.$socket.sendObj(gethistory);
   } else if (message.type == "event" && message.id == 2) {
     console.log(message.event.data.entity_id);
   } else if (message.type == "result" && message.id == 1) {

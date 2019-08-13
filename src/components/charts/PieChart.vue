@@ -23,8 +23,11 @@ export default {
             data: this.deviceOnlineCount,
             borderWidth: 4
           }
-        ],
-        labels: ["在线", "离线"]
+        ]
+        // labels: [
+        //   "Online" + " " + this.deviceOnlineCount[0],
+        //   "Offline" + " " + this.deviceOnlineCount[1]
+        // ]
       };
     },
     ...mapGetters(["deviceOnlineCount"])
