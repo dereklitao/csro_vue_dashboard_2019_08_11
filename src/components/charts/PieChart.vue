@@ -17,17 +17,17 @@ export default {
         datasets: [
           {
             backgroundColor: [
-              "rgba(0, 150, 136, 0.6)",
-              "rgba(255, 99, 132, 0.6)"
+              "rgba(0, 150, 136, 0.5)",
+              "rgba(255, 99, 132, 0.5)"
             ],
             data: this.deviceOnlineCount,
             borderWidth: 4
           }
+        ],
+        labels: [
+          "在线：" + this.deviceOnlineCount[0],
+          "离线：" + this.deviceOnlineCount[1]
         ]
-        // labels: [
-        //   "Online" + " " + this.deviceOnlineCount[0],
-        //   "Offline" + " " + this.deviceOnlineCount[1]
-        // ]
       };
     },
     ...mapGetters(["deviceOnlineCount"])

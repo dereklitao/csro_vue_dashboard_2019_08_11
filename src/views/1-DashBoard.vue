@@ -29,6 +29,12 @@ export default {
     return {};
   },
 
+  created: function() {
+    this.$axios.get("/history/period").then(response => {
+      console.log(response);
+    });
+  },
+
   methods: {
     ...mapMutations(["toggleShowLeftDrawer", "changePieData"]),
     changeData() {
