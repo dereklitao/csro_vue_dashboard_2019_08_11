@@ -4,7 +4,7 @@
       <v-icon small color="grey darken-1">{{icon}}</v-icon>
     </v-list-item-action>
     <v-list-item-content>
-      <v-list-item-title class="grey--text font-weight-light">{{title}}</v-list-item-title>
+      <v-list-item-title class="grey--text font-weight-normal">{{title}}</v-list-item-title>
     </v-list-item-content>
   </v-list-item>
 </template>

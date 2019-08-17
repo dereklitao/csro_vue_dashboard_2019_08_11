@@ -1,8 +1,15 @@
 <template>
-  <v-card width="400px" height="225">
-    <v-flex shrink>
-      <LineChartJS :width="380" :height="210" :chart-data="tempLineData" :options="options"></LineChartJS>
-      <v-icon color="teal lighten-2" class="tempicon">mdi-thermometer-lines</v-icon>
+  <v-card width="390px" height="275">
+    <v-toolbar flat dark dense elevation="2" color="rgba(0, 150, 136, 0.85)" height="48">
+      <v-icon dark large color>mdi-thermometer-lines</v-icon>
+      <v-spacer></v-spacer>
+      <v-toolbar-title>
+        <span class="headline font-weight-normal">{{tempDatas[tempDatas.length-1]}}</span>
+        <span class="title font-weight-normal">℃</span>
+      </v-toolbar-title>
+    </v-toolbar>
+    <v-flex align-center>
+      <LineChartJS :width="380" :height="220" :chart-data="tempLineData" :options="options"></LineChartJS>
     </v-flex>
   </v-card>
 </template>
@@ -25,28 +32,23 @@ export default {
         datasets: [
           {
             fill: true,
-            pointRadius: 3,
+            pointRadius: 1,
             pointHoverRadius: 6,
-            lineTension: 0.3,
+            borderWidth: 2,
             label: "室内温度",
             data: this.tempDatas,
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
-            borderColor: "rgba(255, 99, 132, 1)",
-            pointBackgroundColor: "rgba(255, 99, 132, 1)",
-            pointBorderColor: "rgba(255, 99, 132, 1)"
+            backgroundColor: "rgba(0, 150, 136, 0.5)",
+            borderColor: "rgba(0, 150, 136, 1)",
+            pointBackgroundColor: "rgba(0, 150, 136, 0.5)",
+            pointBorderColor: "rgba(0, 150, 136, 1)"
           }
         ]
       };
     },
     options() {
       return {
-        responsive: true,
         legend: {
-          display: false,
-          labels: {
-            fontSize: 10,
-            fontStyle: "light"
-          }
+          display: false
         },
         scales: {
           xAxes: [
@@ -59,7 +61,7 @@ export default {
           yAxes: [
             {
               ticks: {
-                maxTicksLimit: 8
+                maxTicksLimit: 10
               }
             }
           ]
@@ -74,7 +76,6 @@ export default {
 .tempicon {
   position: absolute;
   top: 5px;
-  left: 5px;
-  background-color: rgb(255, 255, 255);
+  right: 5px;
 }
 </style>

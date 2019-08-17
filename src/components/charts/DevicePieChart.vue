@@ -1,9 +1,9 @@
 <template>
-  <v-card width="220" height="225">
-    <PieChartJS :chart-data="chartdata" :options="options"></PieChartJS>
-    <v-icon color="teal lighten-2" class="connetcionicon">mdi-access-point-network</v-icon>
-    <p class="onlinelabels">{{deviceOnlineCount[0]}}在线</p>
-    <p class="offlinelabels">{{deviceOnlineCount[1]}}离线</p>
+  <v-card width="150" height="150" flat>
+    <v-flex shrink>
+      <PieChartJS :chart-data="chartdata" :options="options" :width="100" :height="100"></PieChartJS>
+      <!-- <v-icon large color="rgba(0, 150, 136, 0.5)" class="deviceicon">mdi-home-automation</v-icon> -->
+    </v-flex>
   </v-card>
 </template>
 
@@ -21,8 +21,8 @@ export default {
         datasets: [
           {
             backgroundColor: [
-              "rgba(0, 150, 136, 0.5)",
-              "rgba(255, 99, 132, 0.5)"
+              "rgba(0, 150, 136, 0.65)",
+              "rgba(255, 99, 132, 0.65)"
             ],
             data: this.deviceOnlineCount,
             borderWidth: 3,
@@ -34,7 +34,7 @@ export default {
     },
     options() {
       return {
-        cutoutPercentage: 40,
+        cutoutPercentage: 0,
         legend: {
           display: false
         }
@@ -47,21 +47,22 @@ export default {
 <style>
 .onlinelabels {
   position: absolute;
-  top: 88px;
-  left: 85px;
-  font-weight: lighter;
-  color: rgba(0, 150, 136, 0.5);
+  top: 65px;
+  left: 66px;
+  font-size: 14px;
+  font-weight: thin;
+  color: grey;
 }
 .offlinelabels {
   position: absolute;
-  top: 112px;
-  left: 85px;
-  font-weight: lighter;
+  top: 90px;
+  left: 70px;
+  font-size: 12px;
   color: rgba(255, 99, 132, 0.5);
 }
-.connetcionicon {
+.deviceicon {
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 58px;
+  left: 58px;
 }
 </style>

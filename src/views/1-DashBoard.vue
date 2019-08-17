@@ -1,25 +1,53 @@
 <template>
   <v-container grid-list-lg>
+    <v-layout row>
+      <v-flex shrink>
+        <TempLineChart></TempLineChart>
+      </v-flex>
+      <v-flex shrink>
+        <HumiLineChart></HumiLineChart>
+      </v-flex>
+      <v-flex shrink>
+        <HchoLineChart></HchoLineChart>
+      </v-flex>
+      <v-flex shrink>
+        <PMBarChart></PMBarChart>
+      </v-flex>
+    </v-layout>
     <v-layout row wrap>
       <v-flex shrink>
-        <DevicePieChart></DevicePieChart>
+        <DevListTabs></DevListTabs>
       </v-flex>
-      <v-flex>
-        <LineChart></LineChart>
+      <v-flex shrink>
+        <v-card width="522px" height="680px"></v-card>
+      </v-flex>
+      <v-flex shrink>
+        <v-card width="522px" height="680px">
+          <WeatherCard></WeatherCard>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import DevicePieChart from "@/components/charts/DevicePieChart";
-import LineChart from "@/components/charts/LineChart";
+import TempLineChart from "@/components/charts/TempLineChart";
+import PMBarChart from "@/components/charts/PMBarChart";
+import HumiLineChart from "@/components/charts/HumiLineChart";
+import HchoLineChart from "@/components/charts/HchoLineChart";
+import DevListTabs from "@/components/tabs/DevListTabs";
+import WeatherCard from "@/components/weather/WeatherCard";
+
 import { mapMutations } from "vuex";
 export default {
   name: "dashboard",
   components: {
-    DevicePieChart,
-    LineChart
+    TempLineChart,
+    HumiLineChart,
+    PMBarChart,
+    HchoLineChart,
+    DevListTabs,
+    WeatherCard
   },
   data() {
     return {};

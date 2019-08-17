@@ -1,16 +1,10 @@
 import Vue from "vue";
+import AirState from "@/store/airparams";
 import { authinfo, fetchStates, subscribe, gethistory } from "./hassio";
-
-var messageId = 10;
 
 const state = {
   showLeftDrawer: true,
   deviceOnlineCount: [12, 6],
-  temperatureData: [
-    [25.4, 24.8, 25.6, 28.9, 30.5, 33.2, 12.4, 12.5, 21.0, 12.5],
-    [16.5, 12.6, 18.6, 12.5, 13.5, 20.3, 25.6, 28.9, 30.5, 33.2],
-    [26.5, 16.6, 13.6, 22.5, 15.5, 22.3, 15.6, 18.9, 32.5, 30.2]
-  ],
   socket: {
     isConnected: false,
     message: "",
@@ -20,8 +14,7 @@ const state = {
 
 const getters = {
   deviceOnlineCount: state => state.deviceOnlineCount,
-  showLeftDrawer: state => state.showLeftDrawer,
-  temperatureData: state => state.temperatureData
+  showLeftDrawer: state => state.showLeftDrawer
 };
 
 const actions = {};
@@ -59,7 +52,6 @@ const mutations = {
 };
 
 function receiveMessage(message) {
-  console.log(message);
   if (message.type == "auth_required") {
     Vue.prototype.$socket.sendObj(authinfo);
   } else if (message.type == "auth_ok") {
@@ -67,7 +59,9 @@ function receiveMessage(message) {
     Vue.prototype.$socket.sendObj(subscribe);
     Vue.prototype.$socket.sendObj(gethistory);
   } else if (message.type == "event" && message.id == 2) {
-    console.log(message.event.data.entity_id);
+    if (message.event.data.entity_id.indexOf("sensor.airmon") === 0) {
+      updateAirParams(message.event.data);
+    }
   } else if (message.type == "result" && message.id == 1) {
     state.deviceOnlineCount = [0, 0];
     message.result.forEach(device => {
@@ -78,6 +72,32 @@ function receiveMessage(message) {
       }
     });
   }
+}
+
+function updateAirParams(data) {
+  if (data.entity_id.indexOf("airmon_pm1_") != -1) {
+    AirState.state.pmDatas = [
+      data.new_state.state,
+      AirState.state.pmDatas[1],
+      AirState.state.pmDatas[2]
+    ];
+    console.log("PM1");
+  } else if (data.entity_id.indexOf("airmon_pm2d5_") != -1) {
+    AirState.state.pmDatas = [
+      AirState.state.pmDatas[0],
+      data.new_state.state,
+      AirState.state.pmDatas[2]
+    ];
+    console.log("PM25");
+  } else if (data.entity_id.indexOf("airmon_pm10_") != -1) {
+    AirState.state.pmDatas = [
+      AirState.state.pmDatas[0],
+      AirState.state.pmDatas[1],
+      data.new_state.state
+    ];
+    console.log("PM10");
+  }
+  console.log(data.entity_id);
 }
 
 export default {
