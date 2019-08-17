@@ -7,7 +7,7 @@ import vuetify from "./plugins/vuetify";
 import Chart from "chart.js";
 import VueNativeSock from "vue-native-websocket";
 
-Chart.defaults.global.defaultFontFamily = "Helvetica Neue";
+// Chart.defaults.global.defaultFontFamily = "Helvetica Neue";
 Chart.defaults.global.defaultFontStyle = "normal";
 Vue.config.productionTip = false;
 

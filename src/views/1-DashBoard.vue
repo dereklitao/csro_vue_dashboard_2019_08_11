@@ -1,28 +1,24 @@
 <template>
-  <v-container grid-list-xl>
+  <v-container grid-list-lg>
     <v-layout row wrap>
       <v-flex shrink>
-        <PieChart></PieChart>
+        <DevicePieChart></DevicePieChart>
       </v-flex>
       <v-flex>
         <LineChart></LineChart>
-      </v-flex>
-      <v-flex>
-        <v-btn color="success" @click="changeData">ChangeDrawer</v-btn>
-        <v-btn color="success" @click="changePie">ChangePie</v-btn>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import PieChart from "@/components/charts/PieChart";
+import DevicePieChart from "@/components/charts/DevicePieChart";
 import LineChart from "@/components/charts/LineChart";
 import { mapMutations } from "vuex";
 export default {
   name: "dashboard",
   components: {
-    PieChart,
+    DevicePieChart,
     LineChart
   },
   data() {

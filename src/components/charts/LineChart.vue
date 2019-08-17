@@ -1,13 +1,14 @@
 <template>
   <v-card width="400px" height="225">
     <v-flex shrink>
-      <LineChartJS :width="380" :height="220" :chart-data="tempLineData" :options="options"></LineChartJS>
+      <LineChartJS :width="380" :height="210" :chart-data="tempLineData" :options="options"></LineChartJS>
+      <v-icon color="teal lighten-2" class="tempicon">mdi-thermometer-lines</v-icon>
     </v-flex>
   </v-card>
 </template>
 
 <script>
-import LineChartJS from "@/components/charts/LineChartJS";
+import LineChartJS from "@/components/charts/chartJS/LineChartJS";
 import { mapGetters } from "vuex";
 export default {
   components: {
@@ -41,7 +42,7 @@ export default {
       return {
         responsive: true,
         legend: {
-          display: true,
+          display: false,
           labels: {
             fontSize: 10,
             fontStyle: "light"
@@ -70,4 +71,10 @@ export default {
 </script>
 
 <style>
+.tempicon {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: rgb(255, 255, 255);
+}
 </style>
