@@ -1,154 +1,100 @@
-import Vue from "vue";
+import moment from "moment";
 
 const state = {
-  humiDatas: [
-    56,
-    58,
-    63,
-    62,
-    58,
-    61,
-    62,
-    58,
-    61,
-    65,
-    56,
-    58,
-    61,
-    59,
-    58,
-    61,
-    62,
-    59,
-    61,
-    59,
-    56,
-    58,
-    63,
-    58,
-    58,
-    61,
-    61,
-    58,
-    61,
-    62
-  ],
-  tempDatas: [
-    22.2,
-    23.5,
-    22.6,
-    24.6,
-    25.3,
-    26.1,
-    24.5,
-    28.5,
-    30.2,
-    29.8,
-    36.2,
-    23.5,
-    22.6,
-    24.6,
-    25.3,
-    26.1,
-    28.5,
-    28.5,
-    30.2,
-    29.8,
-    28.2,
-    24.5,
-    26.6,
-    24.6,
-    25.3,
-    26.1,
-    24.5,
-    28.5,
-    30.2,
-    29.8
-  ],
-  tempLabels: [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24",
-    "25",
-    "26",
-    "27",
-    "28",
-    "29",
-    "30"
-  ],
-  humiLabels: [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24",
-    "25",
-    "26",
-    "27",
-    "28",
-    "29",
-    "30"
-  ],
-  pmDatas: [37, 60, 72]
+  tempDatas: [{ t: moment(), y: 0.5 }, { t: moment(), y: 1 }],
+  humiDatas: [{ t: moment(), y: 0.5 }, { t: moment(), y: 1 }],
+  hchoDatas: [{ t: moment(), y: 0.5 }, { t: moment(), y: 1 }],
+  pm1Datas: [{ t: moment(), y: 0.5 }, { t: moment(), y: 1 }],
+  pm25Datas: [{ t: moment(), y: 0.5 }, { t: moment(), y: 1 }],
+  pm10Datas: [{ t: moment(), y: 0.5 }, { t: moment(), y: 1 }]
 };
 
 const getters = {
   tempDatas: state => state.tempDatas,
-  tempLabels: state => state.tempLabels,
   humiDatas: state => state.humiDatas,
-  humiLabels: state => state.humiLabels,
-  pmDatas: state => state.pmDatas
+  hchoDatas: state => state.hchoDatas,
+  pm1Datas: state => state.pm1Datas,
+  pm25Datas: state => state.pm25Datas,
+  pm10Datas: state => state.pm10Datas
 };
 
 const actions = {
-  pm25update({ commit }, pm25obj) {
-    commit("PM25_UPDATE", pm25obj);
+  tempGetHistory({ commit }, history) {
+    commit("tempGetHistory", history);
+  },
+  humiGetHistory({ commit }, history) {
+    commit("humiGetHistory", history);
+  },
+  hchoGetHistory({ commit }, history) {
+    commit("hchoGetHistory", history);
+  },
+  pm1GetHistory({ commit }, history) {
+    commit("pm1GetHistory", history);
+  },
+  pm25GetHistory({ commit }, history) {
+    commit("pm25GetHistory", history);
+  },
+  pm10GetHistory({ commit }, history) {
+    commit("pm10GetHistory", history);
+  },
+
+  tempGetNewValue({ commit }, val) {
+    commit("tempGetNewValue", val);
+  },
+  humiGetNewValue({ commit }, val) {
+    commit("humiGetNewValue", val);
+  },
+  hchoGetNewValue({ commit }, val) {
+    commit("hchoGetNewValue", val);
+  },
+  pm1GetNewValue({ commit }, val) {
+    commit("pm1GetNewValue", val);
+  },
+  pm25GetNewValue({ commit }, val) {
+    commit("pm25GetNewValue", val);
+  },
+  pm10GetNewValue({ commit }, val) {
+    commit("pm10GetNewValue", val);
   }
 };
 
 const mutations = {
-  PM25_UPDATE(state, pm25obj) {
-    console.log(state, pm25obj);
+  tempGetHistory(state, history) {
+    console.log(state, history);
+  },
+  humiGetHistory(state, history) {
+    console.log(state, history);
+  },
+  hchoGetHistory(state, history) {
+    console.log(state, history);
+  },
+  pm1GetHistory(state, history) {
+    console.log(state, history);
+  },
+  pm25GetHistory(state, history) {
+    console.log(state, history);
+  },
+  pm10GetHistory(state, history) {
+    console.log(state, history);
+  },
+
+  tempGetNewValue(state, val) {
+    console.log(state, val);
+  },
+  humiGetNewValue(state, val) {
+    console.log(state, val);
+  },
+  hchoGetNewValue(state, val) {
+    console.log(state, val);
+  },
+  pm1GetNewValue(state, val) {
+    console.log(state, val);
+  },
+  pm25GetNewValue(state, val) {
+    console.log(state, val);
+  },
+  pm10GetNewValue(state, val) {
+    console.log(state, val);
   }
 };
 

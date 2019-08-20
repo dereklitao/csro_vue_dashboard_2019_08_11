@@ -1,10 +1,8 @@
 import Vue from "vue";
-import AirState from "@/store/airparams";
-import { authinfo, fetchStates, subscribe, gethistory } from "./hassio";
 
 const state = {
-  showLeftDrawer: true,
-  deviceOnlineCount: [12, 6],
+  LeftDrawer: true,
+  devicestate: null,
   socket: {
     isConnected: false,
     message: "",
@@ -13,21 +11,18 @@ const state = {
 };
 
 const getters = {
-  deviceOnlineCount: state => state.deviceOnlineCount,
-  showLeftDrawer: state => state.showLeftDrawer
+  LeftDrawer: state => state.LeftDrawer
 };
 
-const actions = {};
+const actions = {
+  toggleLeftDrawer({ commit }) {
+    commit("toggleLeftDrawer");
+  }
+};
 
 const mutations = {
-  toggleShowLeftDrawer(state) {
-    state.showLeftDrawer = !state.showLeftDrawer;
-  },
-  changePieData(state) {
-    state.deviceOnlineCount = [
-      Math.floor(Math.random() * (50 - 5 + 1)) + 5,
-      Math.floor(Math.random() * (50 - 5 + 1)) + 5
-    ];
+  toggleLeftDrawer(state) {
+    state.LeftDrawer = !state.LeftDrawer;
   },
   SOCKET_ONOPEN(state, event) {
     Vue.prototype.$socket = event.currentTarget;
@@ -53,51 +48,20 @@ const mutations = {
 
 function receiveMessage(message) {
   if (message.type == "auth_required") {
-    Vue.prototype.$socket.sendObj(authinfo);
-  } else if (message.type == "auth_ok") {
-    Vue.prototype.$socket.sendObj(fetchStates);
-    Vue.prototype.$socket.sendObj(subscribe);
-    Vue.prototype.$socket.sendObj(gethistory);
-  } else if (message.type == "event" && message.id == 2) {
-    if (message.event.data.entity_id.indexOf("sensor.airmon") === 0) {
-      updateAirParams(message.event.data);
-    }
-  } else if (message.type == "result" && message.id == 1) {
-    state.deviceOnlineCount = [0, 0];
-    message.result.forEach(device => {
-      if (device.state == "unavailable") {
-        state.deviceOnlineCount[1] += 1;
-      } else {
-        state.deviceOnlineCount[0] += 1;
-      }
+    Vue.prototype.$socket.sendObj({
+      type: "auth",
+      access_token:
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyOTAyOGU5ZTZiNzE0NzNjYTYwMzMwM2JiZTlhMTFlNSIsImlhdCI6MTU2NTYxODc4OCwiZXhwIjoxODgwOTc4Nzg4fQ.k1yq_MQfSyy2GV_5lcuFDn3PH5bw4NRuvydFijRXfbQ"
     });
+  } else if (message.type == "auth_ok") {
+    Vue.prototype.$socket.sendObj({
+      id: 1,
+      type: "subscribe_events",
+      event_type: "state_changed"
+    });
+  } else if (message.type == "event" && message.id == 1) {
+    console.log(message.event.data.entity_id);
   }
-}
-
-function updateAirParams(data) {
-  if (data.entity_id.indexOf("airmon_pm1_") != -1) {
-    AirState.state.pmDatas = [
-      data.new_state.state,
-      AirState.state.pmDatas[1],
-      AirState.state.pmDatas[2]
-    ];
-    console.log("PM1");
-  } else if (data.entity_id.indexOf("airmon_pm2d5_") != -1) {
-    AirState.state.pmDatas = [
-      AirState.state.pmDatas[0],
-      data.new_state.state,
-      AirState.state.pmDatas[2]
-    ];
-    console.log("PM25");
-  } else if (data.entity_id.indexOf("airmon_pm10_") != -1) {
-    AirState.state.pmDatas = [
-      AirState.state.pmDatas[0],
-      AirState.state.pmDatas[1],
-      data.new_state.state
-    ];
-    console.log("PM10");
-  }
-  console.log(data.entity_id);
 }
 
 export default {

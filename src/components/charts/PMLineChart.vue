@@ -5,81 +5,77 @@
       <v-layout row align-center justify-center ml-2 mt-0 mb-0>
         <v-flex>
           <v-toolbar-title>
-            <span class="headline font-weight-normal font-color-white">{{pmDatas[0]}}</span>
+            <span class="headline font-weight-normal font-color-white">{{pm1Datas}}</span>
             <span class="title font-weight-normal font-color-white">μg/m³</span>
           </v-toolbar-title>
         </v-flex>
         <v-flex>
           <v-toolbar-title>
-            <span class="headline font-weight-normal font-color-white">{{pmDatas[1]}}</span>
+            <span class="headline font-weight-normal font-color-white">{{pm25Datas}}</span>
             <span class="title font-weight-normal font-color-white">μg/m³</span>
           </v-toolbar-title>
         </v-flex>
         <v-flex>
           <v-toolbar-title>
-            <span class="headline font-weight-normal font-color-white">{{pmDatas[2]}}</span>
+            <span class="headline font-weight-normal font-color-white">{{pm10Datas}}</span>
             <span class="title font-weight-normal font-color-white">μg/m³</span>
           </v-toolbar-title>
         </v-flex>
       </v-layout>
     </v-toolbar>
     <v-flex align-center>
-      <BarChartJS :chart-data="chartdata" :options="options" :width="350" :height="205"></BarChartJS>
+      <LineChartJS :chart-data="pmLineData" :options="options" :width="350" :height="205"></LineChartJS>
     </v-flex>
   </v-card>
 </template>
 
 <script>
-import BarChartJS from "@/components/charts/chartJS/BarChartJS";
-import { mapGetters } from "vuex";
+import LineChartJS from "@/components/charts/chartJS/LineChartJS";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
-    BarChartJS
+    LineChartJS
   },
   computed: {
-    ...mapGetters(["pmDatas"]),
-    chartdata() {
+    ...mapGetters({
+      pm1Datas:"pm1Datas", 
+      pm25Datas:"pm25Datas", 
+      pm10Datas:"pm10Datas"
+      }),
+    pmLineData() {
       return {
-        labels: ["PM1.0", "PM2.5", "PM10"],
         datasets: [
           {
-            data: this.pmDatas,
-            backgroundColor: [
-              "rgba(0, 150, 136, 0.5)",
-              "rgba(255, 99, 132, 0.5)",
-              "rgba(255, 205, 86, 0.5)"
-            ]
+            fill: true,
+            pointRadius: 1,
+            pointHoverRadius: 6,
+            borderWidth: 2,
+            label: "室内温度",
+            data: this.pm1Datas,
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            pointBackgroundColor: "rgba(255, 99, 132, 0.5)",
+            pointBorderColor: "rgba(255, 99, 132, 1)"
           }
         ]
       };
     },
-    options() {
+  options() {
       return {
-        responsive: true,
-        legend: {
-          display: false
-        },
         scales: {
           xAxes: [
             {
-              ticks: {
-                maxTicksLimit: 10
-              }
-            }
-          ],
-          yAxes: [
-            {
-              ticks: {
-                suggestedMin: 0,
-                maxTicksLimit: 10
+              type: "time",
+              time: {
+                unit: "hour"
               }
             }
           ]
         }
       };
-    }
+    },
   }
-};
+}
 </script>
 
 <style>
@@ -87,6 +83,5 @@ export default {
   position: absolute;
   top: 5px;
   right: 5px;
-  /* background-color: rgb(255, 255, 255); */
 }
 </style>

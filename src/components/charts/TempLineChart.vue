@@ -16,7 +16,7 @@
 
 <script>
 import LineChartJS from "@/components/charts/chartJS/LineChartJS";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions} from "vuex";
 export default {
   components: {
     LineChartJS
@@ -24,11 +24,9 @@ export default {
   computed: {
     ...mapGetters({
       tempDatas: "tempDatas",
-      tempLabels: "tempLabels"
     }),
     tempLineData() {
       return {
-        labels: this.tempLabels,
         datasets: [
           {
             fill: true,
@@ -47,29 +45,22 @@ export default {
     },
     options() {
       return {
-        legend: {
-          display: false
-        },
         scales: {
           xAxes: [
             {
-              ticks: {
-                maxTicksLimit: 10
-              }
-            }
-          ],
-          yAxes: [
-            {
-              ticks: {
-                maxTicksLimit: 10
+              type: "time",
+              time: {
+                unit: "hour"
               }
             }
           ]
         }
       };
-    }
+    },
   }
 };
+
+
 </script>
 
 <style>

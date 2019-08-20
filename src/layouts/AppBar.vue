@@ -12,13 +12,12 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 export default {
   methods: {
-    ...mapMutations(["toggleShowLeftDrawer"]),
-    toggleLeftDrawer() {
-      this.toggleShowLeftDrawer();
-    }
+    ...mapActions({
+      toggleLeftDrawer: "toggleLeftDrawer"
+    })
   }
 };
 </script>

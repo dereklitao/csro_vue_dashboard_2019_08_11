@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="showLeftDrawer" app clipped>
+  <v-navigation-drawer :value="LeftDrawer" app clipped>
     <v-container grid-list-lg>
       <v-layout row justify-center>
         <v-flex shrink>
@@ -18,9 +18,6 @@
         <v-flex shrink>
           <v-card height="250px" width="250px" flat></v-card>
         </v-flex>
-        <v-flex shrink>
-          <DevicePieChart></DevicePieChart>
-        </v-flex>
       </v-layout>
     </v-container>
   </v-navigation-drawer>
@@ -28,15 +25,15 @@
 
 <script>
 import LeftDrawerItem from "@/components/drawer/LeftDrawerItem";
-import DevicePieChart from "@/components/charts/DevicePieChart";
 import { mapGetters } from "vuex";
 export default {
   components: {
-    LeftDrawerItem,
-    DevicePieChart
+    LeftDrawerItem
   },
   computed: {
-    ...mapGetters(["showLeftDrawer"])
+    ...mapGetters({
+      LeftDrawer: "LeftDrawer"
+    })
   }
 };
 </script>

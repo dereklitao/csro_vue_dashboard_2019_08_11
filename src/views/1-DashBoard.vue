@@ -11,7 +11,7 @@
         <HchoLineChart></HchoLineChart>
       </v-flex>
       <v-flex shrink>
-        <PMBarChart></PMBarChart>
+        <PMLineChart></PMLineChart>
       </v-flex>
     </v-layout>
     <v-layout row wrap>
@@ -32,19 +32,18 @@
 
 <script>
 import TempLineChart from "@/components/charts/TempLineChart";
-import PMBarChart from "@/components/charts/PMBarChart";
+import PMLineChart from "@/components/charts/PMLineChart";
 import HumiLineChart from "@/components/charts/HumiLineChart";
 import HchoLineChart from "@/components/charts/HchoLineChart";
 import DevListTabs from "@/components/tabs/DevListTabs";
 import WeatherCard from "@/components/weather/WeatherCard";
 
-import { mapMutations } from "vuex";
 export default {
   name: "dashboard",
   components: {
     TempLineChart,
     HumiLineChart,
-    PMBarChart,
+    PMLineChart,
     HchoLineChart,
     DevListTabs,
     WeatherCard
@@ -54,20 +53,11 @@ export default {
   },
 
   created: function() {
-    this.$axios.get("/history/period").then(response => {
-      console.log(response);
-    });
+    // this.$axios.get("/history/period").then(response => {
+    //   console.log(response);
+    // });
   },
-
-  methods: {
-    ...mapMutations(["toggleShowLeftDrawer", "changePieData"]),
-    changeData() {
-      this.toggleShowLeftDrawer();
-    },
-    changePie() {
-      this.changePieData();
-    }
-  }
+  methods: {}
 };
 </script>
 

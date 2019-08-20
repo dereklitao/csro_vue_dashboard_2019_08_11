@@ -26,13 +26,31 @@
     "chart.js": "^2.8.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "sass": "^1.17.4",
+    "sass": "^1.22.10",
     "sass-loader": "^7.1.0",
     "vue-chartjs": "^3.4.2",
     "vue-cli-plugin-axios": "0.0.4",
+    "vue-cli-plugin-moment": "^0.1.1",
     "vue-cli-plugin-vuetify": "^0.6.3",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2"
+  },
+  "vue": {
+    "devServer": {
+      "proxy": "http://192.168.2.2:8123",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+      }
+    },
+    "pluginOptions": {
+      "moment": {
+        "locales": [
+          "zh-cn"
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "root": true,
@@ -56,10 +74,5 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ],
-  "vue": {
-    "devServer": {
-      "proxy": "http://192.168.2.2:8123"
-    }
-  }
+  ]
 }

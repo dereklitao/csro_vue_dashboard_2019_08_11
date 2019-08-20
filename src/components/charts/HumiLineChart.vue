@@ -23,12 +23,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      humiDatas: "humiDatas",
-      humiLabels: "humiLabels"
+      humiDatas: "humiDatas"
     }),
     tempLineData() {
       return {
-        labels: this.humiLabels,
         datasets: [
           {
             fill: true,
@@ -47,23 +45,12 @@ export default {
     },
     options() {
       return {
-        legend: {
-          display: false
-        },
         scales: {
           xAxes: [
             {
-              ticks: {
-                maxTicksLimit: 10
-              }
-            }
-          ],
-          yAxes: [
-            {
-              ticks: {
-                maxTicksLimit: 10,
-                suggestedMin: 20,
-                suggestedMax: 90
+              type: "time",
+              time: {
+                unit: "hour"
               }
             }
           ]
