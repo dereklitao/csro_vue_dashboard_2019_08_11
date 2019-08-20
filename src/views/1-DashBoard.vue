@@ -37,8 +37,13 @@ import HumiLineChart from "@/components/charts/HumiLineChart";
 import HchoLineChart from "@/components/charts/HchoLineChart";
 import DevListTabs from "@/components/tabs/DevListTabs";
 import WeatherCard from "@/components/weather/WeatherCard";
-
+import { mapActions } from "vuex";
 export default {
+  methods: {
+    ...mapActions({
+      initStates: "initStates"
+    })
+  },
   name: "dashboard",
   components: {
     TempLineChart,
@@ -48,16 +53,9 @@ export default {
     DevListTabs,
     WeatherCard
   },
-  data() {
-    return {};
-  },
-
-  created: function() {
-    // this.$axios.get("/history/period").then(response => {
-    //   console.log(response);
-    // });
-  },
-  methods: {}
+  beforeMount() {
+    this.initStates();
+  }
 };
 </script>
 

@@ -1,3 +1,4 @@
+import Vue from "vue";
 import moment from "moment";
 
 const state = {
@@ -28,8 +29,23 @@ const actions = {
   hchoGetHistory({ commit }, history) {
     commit("hchoGetHistory", history);
   },
-  pm1GetHistory({ commit }, history) {
-    commit("pm1GetHistory", history);
+  pm1GetHistory({ commit }, entityid) {
+    const starttime =
+      "/history/period/" +
+      moment()
+        .subtract(600, "seconds")
+        .format("YYYY-MM-DDTHH:mm:ssZ");
+    console.log(starttime);
+
+    const config = {
+      url: starttime,
+      params: {
+        filter_entity_id: entityid
+      }
+    };
+    Vue.axios.request(config).then(response => {
+      commit("pm1GetHistory", response.data[0]);
+    });
   },
   pm25GetHistory({ commit }, history) {
     commit("pm25GetHistory", history);
@@ -68,8 +84,16 @@ const mutations = {
   hchoGetHistory(state, history) {
     console.log(state, history);
   },
-  pm1GetHistory(state, history) {
-    console.log(state, history);
+  pm1GetHistory(state, data) {
+    state.tempDatas = [];
+    console.log(data);
+    data.forEach(point => {
+      const newdata = {
+        t: point.last_changed,
+        y: point.state
+      };
+      state.tempDatas.push(newdata);
+    });
   },
   pm25GetHistory(state, history) {
     console.log(state, history);
